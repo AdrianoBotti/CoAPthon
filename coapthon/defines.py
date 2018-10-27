@@ -60,13 +60,13 @@ MONGO_HOST = "127.0.0.1"
 
 MONGO_PORT = 27017
 
-MONGO_DATABASE = "resourceDirectory"
+MONGO_DATABASE = "rd"
 
 MONGO_USER = "RD"
 
 MONGO_PWD = "res-dir"
 
-MONGO_CONFIG_FILE = "/usr/local/etc/mongod.conf"
+MONGO_CONFIG_FILE = "etc/mongod.conf"
 
 """  Message Format """
 
@@ -303,6 +303,7 @@ LOCALHOST = "127.0.0.1"
 HC_PROXY_DEFAULT_PORT = 8080  # TODO there is a standard for this?
 COAP_DEFAULT_PORT = 5683
 DEFAULT_HC_PATH = "/"
+DEFAULT_CH_PATH = "/coap2http"
 BAD_REQUEST = 400  # "Bad Request" error code
 NOT_IMPLEMENTED = 501  # "Not Implemented" error code
 
