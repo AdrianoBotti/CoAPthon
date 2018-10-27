@@ -1,5 +1,6 @@
 import re
 import cherrypy
+import json
 from jinja2 import Environment, FileSystemLoader
 
 from coapthon import defines
@@ -12,7 +13,7 @@ env = Environment(loader=FileSystemLoader('templates'))
 class Root(object):
     def __init__(self):
         self._rd = (defines.RD_HOST, defines.RD_PORT)
-        self._temperature_sensors = {}
+        self._sensors = {}
         self._dbManager = DatabaseManager()
         self._clientPool = []
         self._responses = []
@@ -36,18 +37,20 @@ class Root(object):
         return sensors
 
     def client_callback_observe(self, response):  # pragma: no cover
-        self._responses.append(response.payload)
+        pretty_payload = json.dumps(json.loads(response.payload), indent=2)
+        self._responses.append(pretty_payload)
+        print pretty_payload
 
     def _read_rd(self):
         client = HelperClient(self._rd)
         path = 'rd-lookup/res?rt=temperature'
-        self._temperature_sensors["temperature"] = self._read_rd_sensor(client, path)
+        self._sensors["temperature"] = self._read_rd_sensor(client, path)
         path = 'rd-lookup/res?rt=humidity'
-        self._temperature_sensors["humidity"] = self._read_rd_sensor(client, path)
+        self._sensors["humidity"] = self._read_rd_sensor(client, path)
         path = 'rd-lookup/res?rt=light'
-        self._temperature_sensors["light"] = self._read_rd_sensor(client, path)
+        self._sensors["light"] = self._read_rd_sensor(client, path)
 
-        for k, lst_v in self._temperature_sensors.items():
+        for k, lst_v in self._sensors.items():
             for v in lst_v:
                 pattern = "coap://([0-9a-z.]*):([0-9]*)(/[a-zA-Z0-9/]*)"
                 match = re.match(pattern=pattern, string=v)

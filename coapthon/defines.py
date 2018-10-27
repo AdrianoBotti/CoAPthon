@@ -28,6 +28,10 @@ DISCOVERY_URL = "/.well-known/core"
 
 ALL_COAP_NODES = "224.0.1.187"
 
+NETWORK_PRIVATE_ADDRESS = "127.0.0."
+
+COLLECT_SERVER_PORT = 5681
+
 ALL_COAP_NODES_IPV6 = "FF00::FD"
 
 MAX_PAYLOAD = 1024
@@ -42,11 +46,15 @@ RD_HOST = "127.0.0.1"
 
 RD_PORT = 5680
 
+RD_UPDATE_PERIOD = 60
+
 """ Serial communication parameters"""
 
 SERIAL_PORT = "/dev/ttyUSB0"
 
 SERIAL_BAUDRATE = 115200
+
+READ_SENSOR_PERIOD = 5
 
 """ JSON configuration paths"""
 
@@ -60,7 +68,7 @@ MONGO_HOST = "127.0.0.1"
 
 MONGO_PORT = 27017
 
-MONGO_DATABASE = "rd"
+MONGO_DATABASE = "resourceDirectory"
 
 MONGO_USER = "RD"
 
